@@ -1,0 +1,35 @@
+.login-form {
+    background-color: rgb(111, 177, 183);
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    color: #fff;
+}
+
+input[type="password"],
+input[type="email"]
+{
+    padding: 8px;
+    border-radius: 5px;
+    border: 2px solid #000000;
+}
+
+input[type="submit"] {
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}

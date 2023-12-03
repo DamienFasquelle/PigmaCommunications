@@ -1,0 +1,19 @@
+.underline {
+    position: relative;
+  
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 1px;
+      background-color: black;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: all 0.2s ease-in-out;
+    }
+  
+    &:hover::after {
+      width: 100%;
+    }
+  }
