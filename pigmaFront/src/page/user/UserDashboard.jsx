@@ -2,6 +2,7 @@ import UserHeader from '../../components/user/UserHeader'
 import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react';
+import Footer from '../../components/public/Footer';
 
 const UserDashboard = () => {
 
@@ -166,7 +167,8 @@ const UserDashboard = () => {
                         </div>
                     </div>
                 )}
-                <p className='welcomeClient'>Bienvenue {user.data.name}</p>
+                <section className="welcome">
+                    <p className='welcomeClient'>Bienvenue {user.data.name}</p></section>
                 <section className="form-review form">
                     <h2>Publication d'un avis</h2>
                     <form onSubmit={handleClickPostReview}>
@@ -235,6 +237,7 @@ const UserDashboard = () => {
                     </div>
                 </section>
             </main>
+            <Footer />
         </>
     );
 };

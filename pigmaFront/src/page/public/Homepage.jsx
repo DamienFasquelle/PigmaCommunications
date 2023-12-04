@@ -7,7 +7,9 @@ function Homepage() {
   return (
     <>
       <DynamicHeader />
-      <Description />
+      <main>
+        <Description />
+      </main>
       <Footer />
     </>
   );
