@@ -13,9 +13,7 @@ function Header() {
         </Link>
         <nav className="main-nav">
           <ul>
-            <li>
-              <Link to="/" className="nav-link underline">Accueil</Link>
-            </li>
+
             <li>
               <Link to="/connexion" className="nav-link underline">Connexion / Inscription</Link>
             </li>

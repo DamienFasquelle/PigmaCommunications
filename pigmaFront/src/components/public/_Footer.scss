@@ -4,17 +4,17 @@
 
   .main-container {
     text-align: center;
-    border-top: 1px solid black;
+    border-top: 1px solid $black;
     padding: 20px 0;
 
     p {
       margin: 0;
       font-size: 22px;
-      color: black;
+      color: $black;
     }
 
     .footer-link {
-      color: red; 
+      color: $red; 
       text-decoration: none; 
       transition: color 0.3s ease; 
     }

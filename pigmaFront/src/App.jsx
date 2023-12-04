@@ -1,8 +1,8 @@
-import "./App.scss";
+import "./_App.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./page/public/Homepage";
 import Login from "./page/public/Login";
-import Signup from "./page/public/Signup";
+import Signin from "./page/public/Signin";
 
 function App() {
     return (
@@ -11,7 +11,7 @@ function App() {
                 {/* PUBLIC */}
                 <Route path="/" element={<Homepage />} />
                 <Route path="/connexion" element={<Login />} />
-                <Route path="/inscription" element={<Signup />} />
+                <Route path="/inscription" element={<Signin />} />
                 {/* ADMIN */}
                 {/* USER */}
             </Routes>

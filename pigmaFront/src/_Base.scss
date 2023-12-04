@@ -1,3 +1,8 @@
+// Colors
+
+$black: rgb(0, 0, 0);
+$red: rgb(230, 85, 85);
+
 .underline {
     position: relative;
   
@@ -6,7 +11,7 @@
       position: absolute;
       width: 0;
       height: 1px;
-      background-color: black;
+      background-color: $black;
       bottom: -5px;
       left: 50%;
       transform: translateX(-50%);
