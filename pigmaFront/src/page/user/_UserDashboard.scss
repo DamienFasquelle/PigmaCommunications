@@ -78,10 +78,104 @@
     color: red;
   }
   
-  
-  @media screen and (max-width: 600px) {
-    .review-item {
-      width: calc(100% - 20px);
-    }
+
+  .fail{
+color: $red;
+font-size: x-large;
+text-align: center;
   }
-  
+  .success{
+color: green;
+font-size: x-large;
+text-align: center;
+  }
+  .edit-form-container {
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.edit-form-content {
+    padding: 20px;
+    border-radius: 5px;
+    background-color: white; 
+    max-width: 80%;
+    width: 400px; 
+}
+
+.edit-form-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.edit-form-textarea {
+    width: 100%;
+    min-height: 100px; 
+    max-height: 200px; 
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+.edit-form-input {
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+.rating{
+  width: 25%
+}
+
+.edit-form-buttons {
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.edit-form-cancel,
+.edit-form-submit {
+    padding: 10px 20px;
+    margin-left: 10px; 
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+@media screen and (max-width: 768px) {
+  .edit-form-content {
+    width: 80%;
+    max-width: 100%;
+  }
+
+  .edit-form-textarea {
+    min-height: 80px;
+    max-height: 150px;
+  }
+
+  .edit-form-buttons {
+    justify-content: space-between;
+  }
+
+  .review-buttons {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  .review-buttons button {
+    margin-bottom: 10px;
+  }
+
+  .update-button,
+  .delete-button {
+    width: 100%;
+  }
+}

@@ -3,7 +3,6 @@ import Header from "../../components/public/Header";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
 
 function Login() {
@@ -34,14 +33,8 @@ function Login() {
     if (loginResponse.status === 201) {
       const jwt = responseJson.data;
       Cookies.set("jwt", jwt);
-      const jwtUser = Cookies.get("jwt");
-      const user = jwtDecode(jwtUser);
       setTimeout(() => {
-        if (user.data.role === 1) {
-          navigate("/admin-dashboard");
-        } else {
-          navigate("/user-dashboard");
-        }
+        navigate("/user-dashboard");
       }, 0);
     } else {
       setConnectionError(true);

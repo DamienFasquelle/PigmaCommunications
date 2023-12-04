@@ -9,7 +9,6 @@ const DynamicHeader = () => {
     const jwt = Cookies.get('jwt');
     if (!jwt) {
         return <Header />;
-
     } else {
         return <UserHeader />;
     }

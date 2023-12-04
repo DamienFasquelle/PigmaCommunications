@@ -2,16 +2,19 @@ import UserHeader from '../../components/user/UserHeader'
 import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const UserDashboard = () => {
 
-    const navigate = useNavigate()
     const [content, setContent] = useState('');
     const [reviewPublished, setReviewPublished] = useState([])
     const [publishedError, setPublishedError] = useState(false)
     const [publishedValidate, setPublishedValidate] = useState(false)
+    const [updateError, setUpdateError] = useState(false)
+    const [updateValidate, setUpdateValidate] = useState(false)
     const [responseDeleteError, setResponseDeleteError] = useState(false)
+    const [idUpdate, setIdUpdate] = useState(null);
+    const [requestUpdate, setRequestUpdate] = useState(false);
+    const [updateContentReview, setUpdateContentReview] = useState(null)
     const jwt = Cookies.get('jwt');
     const user = jwtDecode(jwt);
 
@@ -25,13 +28,11 @@ const UserDashboard = () => {
             });
         setReviewPublished(userReviews);
     }
-
     const handleClickPostReview = async (event) => {
         event.preventDefault()
 
         const content = event.target.content.value;
         const rating = event.target.rating.value;
-
         const reviewDataReview = {
             content: content,
             rating: parseInt(rating)
@@ -44,12 +45,8 @@ const UserDashboard = () => {
                 Authorization: `Bearer ${jwt}`,
             },
         });
-
         if (responsePostReview.ok) {
             setPublishedValidate(true);
-            setTimeout(() => {
-                window.location.reload();
-            }, 2000);
         } else {
             setPublishedError(true);
         }
@@ -62,14 +59,43 @@ const UserDashboard = () => {
                 Authorization: `Bearer ${jwt}`,
             },
         });
-
         if (responseDeleteReview.ok) {
             fetchReviewPublished();
         } else {
             setResponseDeleteError(true);
         }
     };
+    const handleUpdate = (idUpdate, content) => {
+        setUpdateContentReview(content)
+        setRequestUpdate(true);
+        setIdUpdate(idUpdate);
+    };
+    const confirmUpdate = async (event) => {
+        event.preventDefault();
 
+        const editedContent = document.getElementById('editedContent').value;
+        const editedRating = document.getElementById('editedRating').value;
+
+        const responseUpdateReview = await fetch(`http://localhost:3000/review/${idUpdate}`, {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                content: editedContent,
+                rating: editedRating,
+            }),
+        });
+
+        if (responseUpdateReview.ok) {
+            fetchReviewPublished()
+            setUpdateValidate(true)
+        } else {
+            setUpdateError(true)
+        }
+        setRequestUpdate(false);
+    };
     const handleContentChange = (event) => {
         setContent(event.target.value);
     };
@@ -87,12 +113,59 @@ const UserDashboard = () => {
     };
     useEffect(() => {
         fetchReviewPublished()
-    }, []);
+        const timeout = setTimeout(() => {
+            setPublishedError(false);
+            setPublishedValidate(false);
+            setUpdateError(false);
+            setUpdateValidate(false);
+        }, 2500);
+
+        return () => clearTimeout(timeout);
+    }, [publishedError, publishedValidate, updateError, updateValidate]);
 
     return (
         <>
             <UserHeader />
             <main>
+                {requestUpdate && (
+                    <div className="edit-form-container">
+                        <div className="edit-form-content">
+                            <form onSubmit={confirmUpdate}>
+                                <h2 className="edit-form-title">Modifier le Commentaire</h2>
+                                <label htmlFor="editedContent">Nouveau Message :</label>
+                                <textarea
+                                    id="editedContent"
+                                    name="editedContent"
+                                    maxLength="100"
+                                    defaultValue={updateContentReview}
+                                    className="edit-form-textarea"
+                                ></textarea>
+                                <label htmlFor="editedRating">Nouvelle note :</label>
+                                <input
+                                    type="number"
+                                    step="0.5"
+                                    max="5"
+                                    min="0"
+                                    id="editedRating"
+                                    name="editedRating"
+                                    className="edit-form-input rating"
+                                />
+                                <div className="edit-form-buttons">
+                                    <button type="submit" className="edit-form-submit">
+                                        Valider
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="edit-form-cancel"
+                                        onClick={() => setRequestUpdate(false)}
+                                    >
+                                        Annuler
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                )}
                 <p className='welcomeClient'>Bienvenue {user.data.name}</p>
                 <section className="form-review form">
                     <h2>Publication d'un avis</h2>
@@ -127,16 +200,22 @@ const UserDashboard = () => {
                             <button type="submit">Publier l'avis</button>
                         </div>
                         {publishedError && (
-                            <div className="connexionFail">Erreur lors de la publication, veuillez réessayer</div>
+                            <div className="fail">Erreur lors de la publication, veuillez réessayer</div>
                         )}
                         {publishedValidate && (
-                            <div className="connexionFail">Avis publié avec succès</div>
+                            <div className="success">Avis publié avec succès</div>
+                        )}
+                        {updateError && (
+                            <div className="fail">Erreur lors de la modification, veuillez réessayer</div>
+                        )}
+                        {updateValidate && (
+                            <div className="success">Avis modifié avec succès</div>
                         )}
                     </form>
                 </section>
                 <section className="reviewPublished">
                     {responseDeleteError && (
-                        <div className="connexionFail">Avis supprimé avec succés</div>
+                        <div className="fail">Avis supprimé avec succés</div>
                     )}
                     <h2>Vos Avis Publiés</h2>
                     <div className="reviews-list">
@@ -146,9 +225,7 @@ const UserDashboard = () => {
                                 <p>Notation : {review.rating}</p>
                                 <p>Date de création : {formattedDate(review.createdAt)}</p>
                                 <div className="review-buttons">
-                                    {/* <button onClick={() => handleEditReview(review.id)} className='update-button'>
-                                        Modifier
-                                    </button> */}
+                                    <button className='update-button' onClick={() => handleUpdate(review.id, review.content, review.rating)}>Modifier</button>
                                     <button onClick={() => handleDeleteReview(review.id)} className='delete-button'>
                                         Supprimer
                                     </button>

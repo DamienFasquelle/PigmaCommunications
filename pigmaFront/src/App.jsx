@@ -4,17 +4,16 @@ import Homepage from "./page/public/Homepage";
 import Login from "./page/public/Login";
 import Signin from "./page/public/Signin";
 import UserDashboard from "./page/user/UserDashboard";
-import AdminDashboard from "./page/admin/AdminDashboard"
 
 function App() {
     return (
         <Router>
             <Routes>
-                {/* PUBLIC */}
+                {/* Public */}
                 <Route path="/" element={<Homepage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signin" element={<Signin />} />
-                {/* USER */}
+                {/* User */}
                 <Route path="user-dashboard" element={<UserDashboard />} />
             </Routes>
         </Router>

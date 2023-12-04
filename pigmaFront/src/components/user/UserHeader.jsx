@@ -2,7 +2,6 @@ import Cookies from 'js-cookie';
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import logo from "../../images/pigmaLogo.png"
-import { jwtDecode } from 'jwt-decode';
 const UserHeader = () => {
 
     const navigate = useNavigate();
@@ -10,9 +9,6 @@ const UserHeader = () => {
         Cookies.remove("jwt");
         navigate("/login");
     };
-
-    const jwt = Cookies.get("jwt");
-    const user = jwtDecode(jwt);
 
     return (
         <>
