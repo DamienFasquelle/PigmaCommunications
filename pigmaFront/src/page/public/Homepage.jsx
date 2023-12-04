@@ -1,12 +1,12 @@
 import Footer from "../../components/public/Footer";
-import Header from "../../components/public/Header";
+import DynamicHeader from "../../components/user/DynamicHeader";
 import Description from "./Description";
 
 
 function Homepage() {
   return (
     <>
-      <Header />
+      <DynamicHeader />
       <Description />
       <Footer />
     </>

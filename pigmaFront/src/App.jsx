@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./page/public/Homepage";
 import Login from "./page/public/Login";
 import Signin from "./page/public/Signin";
+import UserDashboard from "./page/user/UserDashboard";
+import AdminDashboard from "./page/admin/AdminDashboard"
 
 function App() {
     return (
@@ -10,10 +12,12 @@ function App() {
             <Routes>
                 {/* PUBLIC */}
                 <Route path="/" element={<Homepage />} />
-                <Route path="/connexion" element={<Login />} />
-                <Route path="/inscription" element={<Signin />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signin" element={<Signin />} />
                 {/* ADMIN */}
+                <Route path="/admin-dashboard" element={<AdminDashboard />} />
                 {/* USER */}
+                <Route path="user-dashboard" element={<UserDashboard />} />
             </Routes>
         </Router>
     );

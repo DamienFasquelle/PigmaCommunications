@@ -8,11 +8,10 @@
     align-items: center;
     border-bottom: 1px solid $black;
     padding: 20px 0;
-    .title-wrap {
       .header-logo {
         width: 50%;
         height: auto;
-      }
+        margin-left: 20px;
     }
 
     .main-nav {

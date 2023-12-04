@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
+import logo from "../../images/pigmaLogo.png"
 
 function Header() {
   return (
-    <header className="main-header public-header">
+    <header className="main-header">
       <div className="main-container">
-        <Link to="/" className="title-wrap">
+        <Link to="/">
           <img
             className="header-logo"
-            src="/images/pigmaLogo.png"
+            src={logo}
             alt="logo-pigma"
           />
         </Link>
@@ -15,7 +16,7 @@ function Header() {
           <ul>
 
             <li>
-              <Link to="/connexion" className="nav-link underline">Connexion / Inscription</Link>
+              <Link to="/login" className="nav-link underline">Connexion / Inscription</Link>
             </li>
           </ul>
         </nav>

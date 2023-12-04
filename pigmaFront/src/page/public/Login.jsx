@@ -38,9 +38,9 @@ function Login() {
       const user = jwtDecode(jwtUser);
       setTimeout(() => {
         if (user.data.role === 1) {
-          navigate("/admin/admin-dashboard");
+          navigate("/admin-dashboard");
         } else {
-          navigate("/user/user-dashboard");
+          navigate("/user-dashboard");
         }
       }, 0);
     } else {
@@ -109,7 +109,7 @@ function Login() {
         </form>
         <div className="form-redirection">
           <p>Pas encore de compte ?</p>
-          <Link to="/inscription">
+          <Link to="/signin">
             Inscrivez-vous ici
           </Link>
         </div>

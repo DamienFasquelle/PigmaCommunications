@@ -9,7 +9,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white; 
+    color: rgb(0, 0, 0); 
   }
   
   .container-text {
@@ -23,24 +23,4 @@ body {
   
   .container-text p {
     font-size: 18px;
-  }
-  
-  .presentation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgb(0, 0, 0); 
-  }
-  
-  .presentation-text {
-    text-align: center;
-  }
-  
-  .presentation-text h2 {
-    font-size: 32px;
-    margin-bottom: 20px;
-  }
-  
-  .presentation-text p {
-    font-size: 16px;
   }
