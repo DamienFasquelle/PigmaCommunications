@@ -66,7 +66,7 @@ const UserDashboard = () => {
         if (responseDeleteReview.ok) {
             fetchReviewPublished();
         } else {
-            responseDeleteError(true);
+            setResponseDeleteError(true);
         }
     };
 
@@ -119,7 +119,7 @@ const UserDashboard = () => {
                                 name="rating"
                                 min={0}
                                 max={5}
-                                step={0.1}
+                                step={0.5}
                                 required
                             />
                         </div>
@@ -146,14 +146,11 @@ const UserDashboard = () => {
                                 <p>Notation : {review.rating}</p>
                                 <p>Date de création : {formattedDate(review.createdAt)}</p>
                                 <div className="review-buttons">
-                                    {/* /* <button onClick={() => handleEditReview(review.id)} className='update-button'>
+                                    {/* <button onClick={() => handleEditReview(review.id)} className='update-button'>
                                         Modifier
                                     </button> */}
                                     <button onClick={() => handleDeleteReview(review.id)} className='delete-button'>
                                         Supprimer
-                                    </button>
-                                    <button className='update-button'>
-                                        Modifier
                                     </button>
                                 </div>
                             </div>

@@ -21,6 +21,7 @@ exports.createReview = (req, res) => {
       return reviewModel
         .create({
           ...req.body,
+          name: user.name,
           UserId: user.id,
         })
         .then((result) => {

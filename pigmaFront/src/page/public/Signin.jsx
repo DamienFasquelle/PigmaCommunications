@@ -54,11 +54,10 @@ function Signin() {
 
     if (signinUserResponse.status === 201) {
       setTimeout(() => {
-        navigate("/connexion");
-      }, 2500);
+        navigate("/login");
+      }, 1500);
     } else {
       setconnectionError(true)
-      window.location.reload()
     }
   };
 
@@ -152,7 +151,7 @@ function Signin() {
         </form>
         <div className="form-redirection">
           <p>Déjà un compte ?</p>
-          <Link to="/connexion">
+          <Link to="/login">
             Connectez-vous ici
           </Link>
         </div>
