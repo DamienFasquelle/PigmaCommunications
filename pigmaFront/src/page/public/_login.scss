@@ -27,8 +27,8 @@
   input[type="password"],
   input[type="email"],
   input[type="text"],
-  textarea[type="content"],
-  textarea[type="rating"] {
+  textarea[name="content"],
+  input[type="number"] {
     width: 100%;
     padding: 12px;
     border-radius: 5px;
